@@ -14,8 +14,7 @@ layui.use(['element', 'jquery'], function () {
         type: 'GET',
         url: '/questions/getCountByUid?uid=' + uid,
         success: function (result) {
-            $('#count').html(result.count);
+            $('#count').html(result.data);
         }
     });
-
 });

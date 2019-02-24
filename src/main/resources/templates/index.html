@@ -10,8 +10,8 @@
     <title>问个球——在线问卷调查系统</title>
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <link rel="stylesheet" media="screen" href="css/style.css">
-    <link rel="stylesheet" type="text/css" href="css/reset.css"/>
+    <link rel="stylesheet" media="screen" href="/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/reset.css"/>
 </head>
 <body>
 
@@ -21,7 +21,7 @@
             登录
         </div>
         <div class="login-center clearfix">
-            <div class="login-center-img"><img src="images/name.png"/></div>
+            <div class="login-center-img"><img src="/images/name.png"/></div>
             <div class="login-center-input">
                 <input type="text" id="username" value="" placeholder="请输入您的用户名" onfocus="this.placeholder=''"
                        onblur="this.placeholder='请输入您的用户名'"/>
@@ -29,7 +29,7 @@
             </div>
         </div>
         <div class="login-center clearfix">
-            <div class="login-center-img"><img src="images/password.png"/></div>
+            <div class="login-center-img"><img src="/images/password.png"/></div>
             <div class="login-center-input">
                 <input type="password" id="password" value="" placeholder="请输入您的密码" onfocus="this.placeholder=''"
                        onblur="this.placeholder='请输入您的密码'"/>
@@ -47,10 +47,10 @@
 </div>
 
 <!-- scripts -->
-<script th:src="@{js/particles.min.js}"></script>
-<script th:src="@{js/app.js}"></script>
-<script th:src="@{js/jquery-3.3.1.min.js}"></script>
-<script th:src="@{js/md5.js}"></script>
+<script th:src="@{/js/particles.min.js}"></script>
+<script th:src="@{/js/app.js}"></script>
+<script th:src="@{/js/jquery-3.3.1.min.js}"></script>
+<script th:src="@{/js/md5.js}"></script>
 <script type="text/javascript">
     function hasClass(elem, cls) {
         cls = cls || '';
@@ -93,13 +93,11 @@
                 },
                 error: function () {
                     alert("网络错误，请检查网络连接。");
-                    // fixme:only for test,delete this line while finished development.
-                    $(location).attr('href', 'userCenter');
                 }
-            })
+            });
             document.querySelector(".login").style.display = "block"
         }, 1000)
-    }
+    };
 
     $('#signup').click(function () {
         $(location).attr('href', 'signUp');

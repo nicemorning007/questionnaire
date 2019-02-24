@@ -6,14 +6,26 @@
 <!DOCTYPE html>
 <html lang="zh-cn" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
 <head>
     <meta charset="utf-8">
     <title>问个球——在线问卷调查系统</title>
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <link rel="stylesheet" href="css/layui.css">
+    <link rel="stylesheet" href="/css/layui.css">
 </head>
-<input type="hidden" id="uid" sec:authentication="id"></input>
+
+<script type="text/html" id="lineToolbar">
+    <div class="layui-btn-group">
+        <button class="layui-btn layui-btn-danger layui-btn-sm">
+            <i class="layui-icon">&#xe640;</i>
+        </button>
+        <button class="layui-btn layui-btn-sm">
+            <i class="layui-icon">&#xe615;</i>
+        </button>
+    </div>
+</script>
+<input type="hidden" th:value="${session.user.id}" id="uid">
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
     <div class="layui-header">
@@ -50,25 +62,17 @@
     <div class="layui-body layui-anim layui-anim-upbit">
         <!-- 内容主体区域 -->
         <div style="padding: 15px;">
-            <div style="border-radius: 5px;background-color: #009688;width: 300px;height: 100px;color: white;text-align: center"
-                 onclick="myquestionnaire()">
-                <p style="font-size: 20px">您当前拥有的问卷数</p>
-                <span style="font-size: 50px" id="count">0</span>
-            </div>
+            <table id="myquestionnairestable" lay-filter="test"></table>
         </div>
     </div>
-    <script>
-        function myquestionnaire() {
-            window.location.href = '/myquestionnaire';
-        }
-    </script>
     <div class="layui-footer">
         <!-- 底部固定区域 -->
         © nicemorning.cn
     </div>
 </div>
 <!-- scripts -->
-<script type="text/javascript" th:src="@{layui.js}"></script>
-<script type="text/javascript" th:src="@{js/page/userCenter.js}"></script>
+<script type="text/javascript" th:src="@{/layui.js}"></script>
+<script type="text/javascript" th:src="@{/js/page/myquestionnaire.js}"></script>
 </body>
+
 </html>
