@@ -25,10 +25,34 @@ public class UserController {
     public PageResultEntity signIn(HttpSession session,
                                    @RequestParam("username") String username,
                                    @RequestParam("password") String password) {
-        UserPojo userPojo = new UserPojo("5c71037b67ab09b99df1451e", "username",
-                "password", "nickname");
-        session.setAttribute("user", userPojo);
-        return new PageResultEntity(200, "success", userPojo);
+        UserPojo userPojo = userService.findByUsername(username);
+        System.out.println(userPojo);
+        if (userPojo.getId() != null) {
+            if (userPojo.getPassword().equals(password)) {
+                session.setAttribute("user", userPojo);
+                return new PageResultEntity(200, "success", userPojo);
+            } else {
+                return new PageResultEntity(400, "用户名或密码错误", null);
+            }
+        }
+        return new PageResultEntity(400, "用户名不存在", null);
+    }
+
+    @PostMapping("/signup")
+    public PageResultEntity signup(@RequestParam("username") String username,
+                                   @RequestParam("password") String password,
+                                   @RequestParam("nickname") String nickname) {
+        UserPojo userPojo = new UserPojo(username, password, nickname);
+        UserPojo check = userService.findByUsername(username);
+        if (check.getId() == null) {
+            UserPojo user = userService.saveOrUpdate(userPojo);
+            if (user.getId() != null) {
+                return new PageResultEntity(200, "注册成功", null);
+            }
+        } else {
+            return new PageResultEntity(400, "用户名已存在", null);
+        }
+        return new PageResultEntity(500, "发生未知错误", null);
     }
 
     @GetMapping("/logout")

@@ -1,0 +1,126 @@
+<!--
+  ~ Copyright (c) 2019. All Rights Reserved.
+  ~ FileName: myinformation.html
+  ~ Author: NiceMorning
+  -->
+
+<!DOCTYPE html>
+<html lang="zh-cn" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="utf-8">
+    <title>问个球——在线问卷调查系统</title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="/css/layui.css">
+</head>
+<input type="hidden" th:value="${session.user.id}" id="uid">
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header">
+        <div class="layui-logo">问个球</div>
+        <!-- 头部区域（可配合layui已有的水平导航） -->
+        <ul class="layui-nav layui-layout-left">
+            <li class="layui-nav-item"><a href="/addquestionnaire">快速发布问卷</a></li>
+        </ul>
+        <ul class="layui-nav layui-layout-right">
+            <li class="layui-nav-item">
+                <a href="javascript:;">
+                    Nicemorning
+                </a>
+            </li>
+            <li class="layui-nav-item"><a href="/user/logout">退出</a></li>
+        </ul>
+    </div>
+
+    <div class="layui-side layui-bg-black">
+        <div class="layui-side-scroll">
+            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+            <ul class="layui-nav layui-nav-tree" lay-filter="test">
+                <li class="layui-nav-item">
+                    <a class="" href="/userCenter">个人中心</a>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="/myquestionnaire">我的问卷</a>
+                </li>
+                <li class="layui-nav-item layui-nav-itemed"><a href="/myinformation">我的信息</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="layui-body layui-anim layui-anim-upbit">
+        <!-- 内容主体区域 -->
+        <div style="padding: 15px;">
+            <div class="layui-row">
+                <div class="layui-col-lg7 layui-col-sm12 layui-col-md12 layui-col-xs12">
+                    <form class="layui-form layui-form-pane" action="" method="post">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">用户名</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="username" id="username" disabled class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">昵称</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="nickname" id="nickname" required lay-verify="required"
+                                       placeholder="请输入新昵称" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-input-block">
+                                <a class="layui-btn" lay-submit id="changeNickname">立即提交</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="layui-row">
+                <div class="layui-col-lg7 layui-col-sm12 layui-col-md12 layui-col-xs12">
+                    <fieldset class="layui-elem-field">
+                        <legend>修改密码</legend>
+                        <div class="layui-field-box">
+                            <form class="layui-form layui-form-pane" method="post">
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">新密码</label>
+                                    <div class="layui-input-block">
+                                        <input type="password" id="password" required lay-verify="required"
+                                               placeholder="请输入新密码" autocomplete="off" class="layui-input">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">确认新密码</label>
+                                    <div class="layui-input-block">
+                                        <input type="password" id="confirm" required lay-verify="required"
+                                               placeholder="请再次输入新密码" autocomplete="off" class="layui-input">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <div class="layui-input-block">
+                                        <a class="layui-btn" lay-submit id="changePassword">立即提交</a>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function myquestionnaire() {
+            window.location.href = '/myquestionnaire';
+        }
+    </script>
+    <div class="layui-footer">
+        <!-- 底部固定区域 -->
+        © nicemorning.cn
+    </div>
+</div>
+<!-- scripts -->
+<script type="text/javascript" th:src="@{/layui.js}"></script>
+<script th:src="@{/js/jquery-3.3.1.min.js}"></script>
+<script th:src="@{/js/md5.js}"></script>
+<script type="text/javascript" th:src="@{/js/page/myinformation.js}"></script>
+</body>
+</html>

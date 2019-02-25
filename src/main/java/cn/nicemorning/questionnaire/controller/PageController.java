@@ -34,9 +34,9 @@ public class PageController {
         return "myquestionnaire";
     }
 
-    @RequestMapping("/myinfomation")
+    @RequestMapping("/myinformation")
     public String myinfomation() {
-        return "myinfomation";
+        return "myinformation";
     }
 
     @RequestMapping("/addquestionnaire")

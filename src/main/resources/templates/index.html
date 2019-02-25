@@ -75,12 +75,12 @@
     }
 
     document.querySelector("#signin").onclick = function () {
-        addClass(document.querySelector(".login"), "active")
-        addClass(document.querySelector(".sk-rotating-plane"), "active")
-        document.querySelector(".login").style.display = "none"
+        addClass(document.querySelector(".login"), "active");
+        addClass(document.querySelector(".sk-rotating-plane"), "active");
+        document.querySelector(".login").style.display = "none";
         setTimeout(function () {
-            removeClass(document.querySelector(".login"), "active")
-            removeClass(document.querySelector(".sk-rotating-plane"), "active")
+            removeClass(document.querySelector(".login"), "active");
+            removeClass(document.querySelector(".sk-rotating-plane"), "active");
             $.ajax({
                 type: 'POST',
                 url: '/user/signin',
@@ -89,7 +89,11 @@
                     password: $.md5($('#password').val())
                 },
                 success: function (result) {
-                    $(location).attr('href', 'userCenter');
+                    if (result.code == 200) {
+                        $(location).attr('href', 'userCenter');
+                    } else {
+                        alert(result.msg);
+                    }
                 },
                 error: function () {
                     alert("网络错误，请检查网络连接。");
