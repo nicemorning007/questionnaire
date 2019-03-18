@@ -9,6 +9,17 @@ layui.use(['form', 'jquery', 'layer'], function () {
     var layer = layui.layer;
     var uid = $('#uid').val();
 
+    $.ajax({
+        type: 'GET',
+        url: '/user/getInfo',
+        data: {
+            id: uid
+        },
+        success: function (result) {
+            $('#username').val(result.data.username);
+        }
+    });
+
     $('#changePassword').click(function () {
         var password = $('#password').val();
         var confirm = $('#confirm').val();
@@ -53,4 +64,6 @@ layui.use(['form', 'jquery', 'layer'], function () {
             })
         }
     });
+
+
 });

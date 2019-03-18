@@ -33,4 +33,12 @@ public class UserService {
     public UserPojo saveOrUpdate(UserPojo userPojo) {
         return userRepository.save(userPojo);
     }
+
+    public UserPojo findUserInfoById(String id) {
+        Optional<UserPojo> userPojo = userRepository.findById(id);
+        if (userPojo.isPresent()) {
+            return userPojo.get();
+        }
+        return new UserPojo();
+    }
 }

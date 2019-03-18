@@ -17,10 +17,10 @@
 
 <script type="text/html" id="lineToolbar">
     <div class="layui-btn-group">
-        <button class="layui-btn layui-btn-danger layui-btn-sm">
+        <button class="layui-btn layui-btn-danger layui-btn-sm" lay-event="del">
             <i class="layui-icon">&#xe640;</i>
         </button>
-        <button class="layui-btn layui-btn-sm">
+        <button class="layui-btn layui-btn-sm" lay-event="check">
             <i class="layui-icon">&#xe615;</i>
         </button>
     </div>
@@ -62,7 +62,7 @@
     <div class="layui-body layui-anim layui-anim-upbit">
         <!-- 内容主体区域 -->
         <div style="padding: 15px;">
-            <table id="myquestionnairestable" lay-filter="test"></table>
+            <table id="myquestionnairestable" lay-filter="myquestionnairestable"></table>
         </div>
     </div>
     <div class="layui-footer">

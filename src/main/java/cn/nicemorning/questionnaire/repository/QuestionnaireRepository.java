@@ -16,4 +16,5 @@ public interface QuestionnaireRepository extends MongoRepository<QuestionnairePo
     List<QuestionnairePojo> findAllByUid(String uid);
 
     List<QuestionnairePojo> findByUid(String uid, Pageable pageable);
+
 }

@@ -3,7 +3,6 @@
  * FileName: myquestionnaire.js
  * Author: NiceMorning
  */
-console.log('questionnaire.js');
 layui.use(['table', 'jquery'], function () {
     var table = layui.table;
     var $ = layui.jquery;
@@ -11,7 +10,7 @@ layui.use(['table', 'jquery'], function () {
     //我的问卷分页表格
     table.render({
         elem: '#myquestionnairestable'
-        , height: 'full-200'
+        , height: 'full'
         , toolbar: '<h3>我的问卷</h3>'
         , url: '/questions/getAllQuestionnaireByUid?uid=' + uid //数据接口
         , page: true //开启分页
@@ -22,16 +21,21 @@ layui.use(['table', 'jquery'], function () {
         ]]
     });
 
-    //监听事件
-    table.on('toolbar(test)', function (obj) {
-        var checkStatus = table.checkStatus(obj.config.id);
-        switch (obj.event) {
-            case 'add':
-                layer.msg('添加');
-                break;
-            case 'delete':
-                layer.msg('删除');
-                break;
-        }
+    table.on('row(myquestionnairestable)', function (obj) {
+        var data = obj.data;
+        console.log(data);
     });
+
+    table.on('tool(myquestionnairestable)', function (obj) {
+        var data = obj.data;
+        if (obj.event === 'check') {
+            layer.msg('ID：' + data.id + ' 的查看操作');
+        } else if (obj.event === 'del') {
+            layer.confirm('真的删除行么', function (index) {
+                obj.del();
+                layer.close(index);
+            });
+        }
+    })
+
 });

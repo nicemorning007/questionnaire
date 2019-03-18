@@ -61,4 +61,9 @@ public class UserController {
         return new ModelAndView("redirect:/index");
     }
 
+    @GetMapping("/getInfo")
+    public PageResultEntity getInfo(@RequestParam("id") String id) {
+        return new PageResultEntity(200, "success", userService.findUserInfoById(id));
+    }
+
 }
