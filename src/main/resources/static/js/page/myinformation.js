@@ -17,6 +17,7 @@ layui.use(['form', 'jquery', 'layer'], function () {
         },
         success: function (result) {
             $('#username').val(result.data.username);
+            $('#nicknameShow').text(result.data.nickname)
         }
     });
 
@@ -35,7 +36,7 @@ layui.use(['form', 'jquery', 'layer'], function () {
                         password: $.md5(password)
                     },
                     success: function (reslut) {
-                        layer.msg(reslut.msg, {icon: 0});
+                        layer.msg(reslut.msg, {icon: 1});
                     },
                     error: function (result) {
                         layer.msg('网络错误请重试', {icon: 0});
@@ -56,7 +57,7 @@ layui.use(['form', 'jquery', 'layer'], function () {
                     nickname: nickname
                 },
                 success: function (result) {
-                    layer.msg(result.msg, {icon: 0});
+                    layer.msg('发布成功', {icon: 1});
                 },
                 error: function (result) {
                     layer.msg('网络错误请重试', {icon: 0});

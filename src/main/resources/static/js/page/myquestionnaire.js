@@ -32,7 +32,23 @@ layui.use(['table', 'jquery'], function () {
             layer.msg('ID：' + data.id + ' 的查看操作');
         } else if (obj.event === 'del') {
             layer.confirm('真的删除行么', function (index) {
-                obj.del();
+                $.ajax({
+                    url: '/questions/deleteByQid',
+                    data: {
+                        qid: data.id
+                    },
+                    success: function (result) {
+                        if (result.data.code == 200) {
+                            layer.msg(result.data.message, {icon: 1});
+                            obj.del();
+                        } else {
+                            layer.msg(result.data.message)
+                        }
+                    },
+                    error: function () {
+                        layer.msg("发生未知错误")
+                    }
+                })
                 layer.close(index);
             });
         }

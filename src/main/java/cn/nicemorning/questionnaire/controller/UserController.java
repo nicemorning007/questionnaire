@@ -66,4 +66,32 @@ public class UserController {
         return new PageResultEntity(200, "success", userService.findUserInfoById(id));
     }
 
+    @PostMapping("/editInfo")
+    public PageResultEntity editInfo(@RequestParam("uid") String uid,
+                                     @RequestParam("nickname") String nickname) {
+        UserPojo userPojo = userService.findUserInfoById(uid);
+        if (userPojo.getId() != null) {
+            userPojo.setNickname(nickname);
+            userPojo = userService.saveOrUpdate(userPojo);
+            if (userPojo.getNickname() == nickname) {
+                return new PageResultEntity(200, "修改成功", userPojo);
+            }
+        }
+        return new PageResultEntity(500, "发生未知错误", null);
+    }
+
+    @PostMapping("/editpwd")
+    public PageResultEntity editpwd(@RequestParam("uid") String uid,
+                                     @RequestParam("password") String password) {
+        UserPojo userPojo = userService.findUserInfoById(uid);
+        if (userPojo.getId() != null) {
+            userPojo.setPassword(password);
+            userPojo = userService.saveOrUpdate(userPojo);
+            if (userPojo.getPassword() == password) {
+                return new PageResultEntity(200, "修改成功", userPojo);
+            }
+        }
+        return new PageResultEntity(500, "发生未知错误", null);
+    }
+
 }

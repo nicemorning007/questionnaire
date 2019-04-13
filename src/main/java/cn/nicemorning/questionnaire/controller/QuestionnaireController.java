@@ -40,4 +40,13 @@ public class QuestionnaireController {
     public PageResultEntity getCountByUid(@RequestParam("uid") String uid) {
         return new PageResultEntity(200, "success", questionnaireService.findAllByUid(uid).size());
     }
+
+    @GetMapping("/deleteByQid")
+    public PageResultEntity deleteByQid(@RequestParam("qid") String qid) {
+        QuestionnairePojo questionnairePojo = this.questionnaireService.getByQid(qid);
+        if (questionnairePojo != null) {
+            return new PageResultEntity(200, "删除成功", null);
+        }
+        return new PageResultEntity(500, "发生未知错误", null);
+    }
 }

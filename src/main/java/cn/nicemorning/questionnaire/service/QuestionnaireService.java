@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class QuestionnaireService {
@@ -34,5 +35,19 @@ public class QuestionnaireService {
 
     public List<QuestionnairePojo> findAllByPageByUid(int page, int limit, String uid) {
         return questionnaireRepository.findByUid(uid, PageRequest.of(page - 1, limit));
+    }
+
+    @Transactional
+    public void delete(QuestionnairePojo questionnairePojo) {
+        this.questionnaireRepository.delete(questionnairePojo);
+    }
+
+    public QuestionnairePojo getByQid(String qid) {
+        Optional<QuestionnairePojo> optional = this.questionnaireRepository.findById(qid);
+        if (optional.isPresent()) {
+            return optional.get();
+        } else {
+            return new QuestionnairePojo();
+        }
     }
 }

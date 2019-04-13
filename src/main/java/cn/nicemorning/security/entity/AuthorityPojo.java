@@ -4,18 +4,22 @@
  * Author: NiceMorning
  */
 
-package cn.nicemorning.security.db.mapper;
+package cn.nicemorning.security.entity;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
  * 该实体类用于存储身份权限分级。
  */
 @Document(collection = "security")
-public class Authority {
+public class AuthorityPojo {
     @Id
     private String id;
+    @Indexed
+    private String uid;
+    // 0:普通用户；1:管理员用户
     private int identity;
 
     public String getId() {
@@ -24,6 +28,14 @@ public class Authority {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 
     public int getIdentity() {
@@ -38,14 +50,15 @@ public class Authority {
     public String toString() {
         return "Authority{" +
                 "id='" + id + '\'' +
+                ", uid='" + uid + '\'' +
                 ", identity=" + identity +
                 '}';
     }
 
-    public Authority(int identity) {
+    public AuthorityPojo(int identity) {
         this.identity = identity;
     }
 
-    public Authority() {
+    public AuthorityPojo() {
     }
 }
